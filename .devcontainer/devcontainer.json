@@ -1,0 +1,16 @@
+{
+    "name": "homelab",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "BASE_IMAGE": "ubuntu:latest",
+            "DNSCONTROL_VERSION": "4.15.5"
+        }
+    },
+    "containerEnv": {
+        "GIT_EDITOR": "vim"
+    },
+    "features": {
+        "ghcr.io/itsmechlark/features/1password:1": {}
+    }
+}
