@@ -5,6 +5,7 @@ FROM ${BASE_IMAGE}
 ARG DNSCONTROL_VERSION=4.15.5
 
 RUN apt-get update && apt-get install -y traceroute dnsutils ca-certificates wget curl make git zsh unzip sudo pipx vim build-essential
+RUN apt update && apt install software-properties-common -y && add-apt-repository --yes --update ppa:ansible/ansible && apt install ansible -y
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
 
 RUN wget https://github.com/StackExchange/dnscontrol/releases/download/v${DNSCONTROL_VERSION}/dnscontrol-${DNSCONTROL_VERSION}.arm64.deb && dpkg -i dnscontrol-${DNSCONTROL_VERSION}.arm64.deb
