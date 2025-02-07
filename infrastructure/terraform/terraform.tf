@@ -5,6 +5,10 @@ terraform {
       source = "Backblaze/b2"
       version = "0.10.0"
     }
+    onepassword = {
+      source = "1Password/onepassword"
+      version = "2.1.2"
+    }
   }
 
   backend "s3" {
@@ -20,4 +24,11 @@ terraform {
     skip_s3_checksum = true
 
   }
+}
+
+// -------------------------------------------------------------------------------------------------
+// OnePassword
+// -------------------------------------------------------------------------------------------------
+provider "onepassword" {
+  // No need to authenticate, we use the OP_SERVICE_ACCOUNT_TOKEN environment variable
 }
