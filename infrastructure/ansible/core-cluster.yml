@@ -1,0 +1,15 @@
+- name: Deploy RKE2
+  hosts: k8s_core_cluster
+  become: yes
+  vars:
+    rke2_version: v1.32.1+rke2r1
+    rke2_ha_mode: true
+    rke2_api_ip: "192.168.0.10"
+    rke2_cluster_group_name: "k8s_core_cluster"
+    rke2_servers_group_name: "k8s_core_control_plane"
+    rke2_agents_group_name: "k8s_core_workers"
+    rke2_token: "{{ lookup('community.general.onepassword', 'k8s_core_cluster [RKE2]', field='token', vault='Homelab') }}"
+    rke2_agent_token: "{{ lookup('community.general.onepassword', 'k8s_core_cluster [RKE2]', field='agent_token', vault='Homelab') }}"
+  roles:
+    - role: lablabs.rke2
+

@@ -1,0 +1,28 @@
+k8s_core_cluster:
+  children:
+    k8s_core_control_plane:
+    k8s_core_workers:
+
+k8s_core_control_plane:
+  hosts:
+    vm-core-1:
+    vm-core-2:
+    vm-core-3:
+
+core_services:
+  hosts:
+    vm-core-1:
+      ansible_host: 192.168.0.11
+      ansible_user: "{{ lookup('community.general.onepassword', 'K8 Core Admin', field='username', vault='Homelab') }}"
+      ansible_password: "{{ lookup('community.general.onepassword', 'K8 Core Admin', field='password', vault='Homelab') }}"
+      ansible_become_password: "{{ lookup('community.general.onepassword', 'K8 Core Admin', field='password', vault='Homelab') }}"
+    vm-core-2:
+      ansible_host: 192.168.0.12
+      ansible_user: "{{ lookup('community.general.onepassword', 'K8 Core Admin', field='username', vault='Homelab') }}"
+      ansible_password: "{{ lookup('community.general.onepassword', 'K8 Core Admin', field='password', vault='Homelab') }}"
+      ansible_become_password: "{{ lookup('community.general.onepassword', 'K8 Core Admin', field='password', vault='Homelab') }}"
+    vm-core-3:
+      ansible_host: 192.168.0.13
+      ansible_user: "{{ lookup('community.general.onepassword', 'K8 Core Admin', field='username', vault='Homelab') }}"
+      ansible_password: "{{ lookup('community.general.onepassword', 'K8 Core Admin', field='password', vault='Homelab') }}"
+      ansible_become_password: "{{ lookup('community.general.onepassword', 'K8 Core Admin', field='password', vault='Homelab') }}"

@@ -1,0 +1,3 @@
+k8s_clusters:
+  children:
+    k8s_core_cluster:
