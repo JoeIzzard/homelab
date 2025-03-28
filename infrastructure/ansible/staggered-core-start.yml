@@ -1,0 +1,27 @@
+- name: Stagger RKE2 Server Start
+  hosts: k8s_core_cluster
+  become: yes
+  tasks:
+    - name: Stop RKE2 Server
+      command: systemctl stop rke2-server
+      args:
+        executable: /bin/bash
+    - name: Restart RKE2 on primary node
+      command: systemctl start rke2-server
+      args:
+        executable: /bin/bash
+      when: primary_node
+    - name: Wait for RKE2 to start
+      service:
+        name: rke2-server
+        state: started
+      register: rke2Details
+      until: rke2Details.status.ActiveState == "active"
+      retries: 15
+      delay: 20
+      when: primary_node
+    - name: Start secondary nodes
+      command: systemctl start rke2-server
+      args:
+        executable: /bin/bash
+      when: not primary_node
