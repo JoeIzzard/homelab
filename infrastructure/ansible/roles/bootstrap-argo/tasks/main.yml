@@ -25,3 +25,16 @@
     src: ~/argocd.yaml
     kubeconfig: "/home/{{ansible_user}}/.kube/config"
     namespace: argocd
+
+- name: Download Root App Manifest
+  ansible.builtin.get_url:
+    url: https://gitlab.com/JoeIzzard/homelab/-/raw/main/services/root-app/root-app.yml?ref_type=heads
+    dest: ~/root-app.yaml
+    mode: '0664'
+
+- name: Deploy Root App
+  become: yes
+  kubernetes.core.k8s:
+    state: present
+    src: ~/root-app.yaml
+    kubeconfig: "/home/{{ansible_user}}/.kube/config"
