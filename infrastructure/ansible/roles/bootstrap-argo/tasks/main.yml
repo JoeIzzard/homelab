@@ -1,0 +1,27 @@
+- name: Install Kubernetes Python Module
+  ansible.builtin.package:
+    name: python3-kubernetes
+    state: present
+
+- name: Ensure ArgoCD namespace exists
+  become: yes
+  kubernetes.core.k8s:
+    api_version: v1
+    kubeconfig: "/home/{{ansible_user}}/.kube/config"
+    kind: namespace
+    name: argocd
+    state: present
+
+- name: Download argocd manifests
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+    dest: ~/argocd.yaml
+    mode: '0664'
+
+- name: Deploy ArgoCD
+  become: yes
+  kubernetes.core.k8s:
+    state: present
+    src: ~/argocd.yaml
+    kubeconfig: "/home/{{ansible_user}}/.kube/config"
+    namespace: argocd

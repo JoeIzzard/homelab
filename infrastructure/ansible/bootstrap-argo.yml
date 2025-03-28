@@ -1,0 +1,5 @@
+- name: Bootstrap Argo CD
+  hosts: k8s_core_cluster
+  become: yes
+  roles:
+    - bootstrap-argo
