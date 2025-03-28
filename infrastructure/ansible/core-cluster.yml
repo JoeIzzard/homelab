@@ -12,4 +12,28 @@
     rke2_agent_token: "{{ lookup('community.general.onepassword', 'k8s_core_cluster [RKE2]', field='agent_token', vault='Homelab') }}"
   roles:
     - role: lablabs.rke2
+- name: Fix admin user path and config
+  hosts: k8s_core_cluster
+  tasks:
+    - name: Add RKE2 Binaries to Admin User Path
+      lineinfile:
+        path: /home/{{ansible_user}}/.bashrc
+        line: "export PATH=\"/var/lib/rancher/rke2/bin:$PATH\""
+        state: present
+    - name: Ensure .kube directory exists
+      file:
+        path: /home/{{ansible_user}}/.kube
+        state: directory
+        owner: "{{ansible_user}}"
+        group: "{{ansible_user}}"
+        mode: '0755'
+    - name: Add RKE2 KubeConfig to Admin User
+      become: yes
+      ansible.builtin.copy:
+        remote_src: true
+        src: /etc/rancher/rke2/rke2.yaml
+        dest: /home/{{ansible_user}}/.kube/config
+        owner: "{{ansible_user}}"
+        group: "{{ansible_user}}"
+        mode: '0644'
 
