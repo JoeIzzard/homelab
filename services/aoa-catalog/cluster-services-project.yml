@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: core-cluster-services
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app.kubernetes.io/name: core-cluster-services
+    app.kubernetes.io/instance: core-cluster-services
+    app.kubernetes.io/version: 0.0.1
+    app.kubernetes.io/managed-by: argocd
+    homelab.izzard.me/cluster: core
+    
+spec:
+  sourceRepos:
+    - https://gitlab.com/joeizzard/homelab.git
+  destinations:
+    - namespace: '*'
+      server: 'https://kubernetes.default.svc'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
