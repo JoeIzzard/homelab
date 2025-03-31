@@ -1,6 +1,11 @@
 changelog:
   git cliff --config cliff.toml --output CHANGELOG.md
 
+changelog-auto:
+  git cliff --config cliff.toml --output CHANGELOG.md
+  git add CHANGELOG.md
+  git commit --amend --no-edit
+
 build-env:
   op inject -i .env.1password -o .env
 
