@@ -15,3 +15,7 @@ clear-env:
   unset AWS_ACCESS_KEY_ID
   unset AWS_SECRET_ACCESS_KEY
   unset OP_SERVICE_ACCOUNT_TOKEN
+
+ansible-requirements:
+  ansible-galaxy install -r infrastructure/ansible/requirements/galaxy-roles.yml
+  ansible-galaxy install -r infrastructure/ansible/requirements/galaxy-collections.yml
