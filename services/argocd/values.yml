@@ -1,0 +1,4 @@
+namespaceOverride: argocd
+configs:
+  cm:
+    kustomize.buildOptions: --enable-helm
