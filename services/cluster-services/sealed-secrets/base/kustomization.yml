@@ -6,6 +6,6 @@ labels:
     pairs:
       app.kubernetes.io/managed-by: argocd
 
-namespace: sealed-secrets
+namespace: kube-system
 generators:
   - sealed-secrets-helm.yml
