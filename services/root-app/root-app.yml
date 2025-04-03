@@ -5,13 +5,21 @@ metadata:
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
+  labels:
+    app.kubernetes.io/name: root-app
+    app.kubernetes.io/instance: root-app
+    app.kubernetes.io/managed-by: ansible
+    app.kubernetes.io/part-of: app-of-apps
+    app.kubernetes.io/version: 0.0.1
 spec:
   destination:
     namespace: default
     name: in-cluster
   project: default
-  source:
-    repoURL: https://gitlab.com/joeizzard/homelab.git
-    targetRevision: HEAD
-    path: services/aoa-catalog
-    
+  sources:
+    - repoURL: https://gitlab.com/joeizzard/homelab.git
+      targetRevision: HEAD
+      path: services/argocd-apps/applications
+    - repoURL: https://gitlab.com/joeizzard/homelab.git
+      targetRevision: HEAD
+      path: services/argocd-apps/projects
