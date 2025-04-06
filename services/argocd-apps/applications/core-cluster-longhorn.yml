@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: core-cluster-longhorn
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app.kubernetes.io/name: longhorn
+    app.kubernetes.io/instance: longhorn-core
+    app.kubernetes.io/version: 0.0.1
+    app.kubernetes.io/managed-by: argocd
+    homelab.izzard.me/cluster: core
+  annotations:
+    homelab.izzard.me/environment: production
+    homelab.izzard.me/upstream-source: helm
+spec:
+  source:
+    repoURL: https://gitlab.com/joeizzard/homelab.git
+    targetRevision: HEAD
+    path: services/cluster-services/longhorn/overlays/core
+  destination:
+    namespace: longhorn-system
+    server: https://kubernetes.default.svc
+  project: core-cluster-services
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
