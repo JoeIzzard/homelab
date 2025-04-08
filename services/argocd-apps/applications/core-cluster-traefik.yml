@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: core-cluster-traefik
+  namespace: traefik
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/instance: traefik-core
+    app.kubernetes.io/version: 0.0.1
+    app.kubernetes.io/managed-by: argocd
+    homelab.izzard.me/cluster: core
+  annotations:
+    homelab.izzard.me/environment: production
+    homelab.izzard.me/upstream-source: helm
+spec:
+  source:
+    repoURL: https://gitlab.com/joeizzard/homelab.git
+    targetRevision: HEAD
+    path: services/cluster-services/traefik/overlays/core
+  destination:
+    namespace: traefik
+    server: https://kubernetes.default.svc
+  project: core-cluster-services
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
