@@ -1,10 +1,10 @@
 apiVersion: builtin
 kind: HelmChartInflationGenerator
 metadata:
-  name: traefik-crd
-name: traefik-crd
+  name: traefik-crds
+name: traefik-crds
 namespace: traefik
-releaseName: traefik-crd
+releaseName: traefik-crds
 repo: https://traefik.github.io/charts
 valuesFile: crd-values.yml
 version: 1.6.0
