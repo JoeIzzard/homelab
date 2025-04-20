@@ -3,6 +3,10 @@ kind: Kustomization
 
 resources:
   - ../../base
+  - traefik-dashboard-users-sealed.yml
+  - dashboard-certificate.yml
+  - dashboard-middleware.yml
+  - dashboard-ingress.yml
 
 labels:
   - includeSelectors:
