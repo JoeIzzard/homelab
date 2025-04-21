@@ -17,7 +17,7 @@ spec:
         - name: argo-cd-argocd-server
           kind: Service
           port: http
-    - match: Host(`argocd.nebulanet.xyz`) && Headers(`Content-Type`, `application/grpc`)
+    - match: Host(`argocd.nebulanet.xyz`) && Header(`Content-Type`, `application/grpc`)
       kind: Rule
       priority: 11
       services:
