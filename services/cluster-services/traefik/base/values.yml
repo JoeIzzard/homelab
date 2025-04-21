@@ -28,3 +28,10 @@ service:
 
 dashboard:
   enabled: true
+
+ports:
+  web:
+    entryPoint:
+      to: websecure
+      scheme: https
+      permanent: true
