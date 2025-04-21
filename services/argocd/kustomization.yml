@@ -10,3 +10,7 @@ helmCharts:
     namespace: argocd
     version: 7.8.15
     valuesFile: values.yml
+
+resources:
+  - certificate.yml
+  - ingress.yml
