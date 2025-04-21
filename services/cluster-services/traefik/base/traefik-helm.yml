@@ -7,4 +7,4 @@ namespace: traefik
 releaseName: traefik
 repo: https://traefik.github.io/charts
 valuesFile: values.yml
-version: 35.0.0
+version: 35.0.1
