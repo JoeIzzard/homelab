@@ -11,3 +11,20 @@ providers:
   kubernetesCRD:
     enabled: true
     allowCrossNamespace: true
+
+service:
+  enabled: true
+  type: LoadBalancer
+  annotations:
+    service.beta.kubernetes.io/metal-lb: "true"
+    metallb.universe.tf/address-pool: core-ip-pool
+  ports:
+    web:
+      port: 80
+      targetPort: 80
+    websecure:
+      port: 443
+      targetPort: 443
+
+dashboard:
+  enabled: true
