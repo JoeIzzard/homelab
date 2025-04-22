@@ -41,6 +41,7 @@ All notable changes to this project will be documented in this file.
 - Redirect from http to https
 - Add ingress for argocd
 - Allow argocd tls to be terminated at traefik
+- Add ingressroute to longhorn dashboard
 
 ### 🐛 Bug Fixes
 

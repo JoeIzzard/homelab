@@ -3,6 +3,8 @@ kind: Kustomization
 
 resources:
   - ../../base
+  - dashboard-certificate.yml
+  - dashboard-ingress.yml
 
 labels:
   - includeSelectors:
