@@ -42,6 +42,7 @@ All notable changes to this project will be documented in this file.
 - Add ingress for argocd
 - Allow argocd tls to be terminated at traefik
 - Add ingressroute to longhorn dashboard
+- Add basic auth to longhorn dashboard
 
 ### 🐛 Bug Fixes
 

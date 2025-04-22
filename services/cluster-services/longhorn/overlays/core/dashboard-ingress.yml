@@ -12,6 +12,9 @@ spec:
   routes:
     - match: Host(`core-longhorn.nebulanet.xyz`)
       kind: Rule
+      middlewares:
+        - name: longhorn-dashboard-basicauth
+          namespace: longhorn-system
       services:
         - name: longhorn-frontend
           kind: Service
