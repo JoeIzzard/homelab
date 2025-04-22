@@ -5,6 +5,8 @@ resources:
   - ../../base
   - dashboard-certificate.yml
   - dashboard-ingress.yml
+  - dashboard-middleware.yml
+  - dashboard-users.yml
 
 labels:
   - includeSelectors:

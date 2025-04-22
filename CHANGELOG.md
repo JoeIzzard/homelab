@@ -77,6 +77,7 @@ All notable changes to this project will be documented in this file.
 - Add web entrypoint to dashboard ingress
 - Migrate headers to header
 - Ignore caBundle field in Metallb CRD
+- Add basicAuth resources to kustomization
 
 ### 🚜 Refactor
 
