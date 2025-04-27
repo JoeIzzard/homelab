@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: powerdns-admin
-          image: powerdns/pdns-admin:4.9.4
+          image: powerdnsadmin/pda-legacy:v0.4.2
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9191
