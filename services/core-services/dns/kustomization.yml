@@ -20,6 +20,7 @@ resources:
   - resources/powerdns/deployment-powerdns.yml
   - resources/powerdns/service-powerdns.yml
   - resources/powerdns-admin/pvc-powerdns-admin.yml
+  - resources/powerdns-admin/sealed-powerdns-admin-env.yml
   - resources/powerdns-admin/deployment-powerdns-admin.yml
   - resources/powerdns-admin/service-powerdns-admin.yml
   - resources/powerdns-admin/certificate-powerdns-admin.yml
