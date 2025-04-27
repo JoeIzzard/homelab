@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: powerdns-admin
+  namespace: dns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: powerdns-admin
+  template:
+    metadata:
+      labels:
+        app: powerdns-admin
+    spec:
+      containers:
+        - name: powerdns-admin
+          image: powerdns/pdns-admin:4.9.4
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9191
+              name: http
+          env:
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: powerdns-admin-env
+                  key: SECRET_KEY
+          volumeMounts:
+            - mountPath: /data
+              name: powerdns-admin
+
+      volumes:
+        - name: powerdns-admin
+          persistentVolumeClaim:
+            claimName: powerdns-admin

@@ -1,0 +1,16 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: powerdns-forward-zones
+  namespace: dns
+spec:
+  encryptedData:
+    zones.conf: AgBoeLb5AsJBJXDMf6vvXzhoy9nK0hgBdaW8Lk0YpffDjclXKim/LA2J5/xillJjvRUt3YC3Gw4NTyMT/7fbrthf1UvQ/FmaFNJ8ZIDubncSz7B/sW0vG+CK/66Z2+knQUPMFcJp42WWfISleTiFmp9c39ghRgDdfHE96qLxYfrijO/FuxS0zKprGO68P9MSs0HhEo7xtPOEypsgtu++WCjyn/N0Fhn8mpvhpCoWqr4uYP5NHnYZ267PpZWU5yMM49QKX59x0n0LWO/ejZ2JhHE6JsXjhfGc1DsGibUszVcJgZSkkXP4Izn18+F/uRvMB3XID8DRpiMtTlAF20hMguisRDc1Naai3PC4IoTHmsTLQVmy1Ts3JEhsgmRtVEI5feteu5yeKrmchP/b4QHE0eaeX9wwxrdNXnrO1SEuMy5nsEHBV2WPARuUfXDArWknouHoPAMW+K/iHJCIiRvOnKflVawR/R1lYooSsD/cWX76CfPGz1Gdke3iR+qHu+vA8QPkWa8uRsYG5YnKuPdWw/jzPs6gDS76XpMbPYQnMjA7f0DywztvlNwNrxctkiNTkqwFkdjlDVL1d9k+2pyofW3bbtpBM5d0gYSOU/n6OA97BJTK+zIaU6eYvg8WwW39WL+t2hz2FrSWAMWtVNbluwdB84MjEYLOjeqITGsn7tFifLSGzadwdXvBbPQ/BRD61OTA369M1gcVeZOMbhiiU37iCovvlNORMNEafo+K5w==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: powerdns-forward-zones
+      namespace: dns
+    type: Opaque

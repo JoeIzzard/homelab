@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: powerdns
+  namespace: dns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: powerdns
+  template:
+    metadata:
+      labels:
+        app: powerdns
+    spec:
+      containers:
+        - name: powerdns-auth
+          image: powerdns/pdns-auth-49:4.9.4
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5300
+              name: dnsAuth
+            - containerPort: 8081
+              name: api
+          volumeMounts:
+            - mountPath: /etc/powerdns/pdns.d
+              name: pdns-auth-config
+        - name: pdns-recursor
+          image: powerdns/pdns-recursor-52:5.2.2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 53
+              name: dns
+          volumeMounts:
+            - mountPath: /etc/powerdns/recursor.d
+              name: pdns-recursor-config
+            - mountPath: /etc/powerdns/forwardZones
+              name: pdns-forward-zones
+
+      volumes:
+        - name: pdns-auth-config
+          secret:
+            secretName: powerdns-auth-config
+        - name: pdns-recursor-config
+          secret:
+            secretName: powerdns-recursor-config
+        - name: pdns-forward-zones
+          secret:
+            secretName: powerdns-forward-zones

@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: dns
+
+labels:
+  - includeSelectors:
+    pairs:
+      app.kubernetes.io/managed-by: argocd
+
+resources:
+  - resources/shared/namespace.yml
+  - resources/database/pvc.yml
+  - resources/database/pgql-creds.yml
+  - resources/database/deployment.yml
+  - resources/database/service.yml
+  - resources/powerdns/sealed-forward-zones.yml
+  - resources/powerdns/sealed-pdns-auth-config.yml
+  - resources/powerdns/sealed-pdns-recursor-config.yml
+  - resources/powerdns/deployment-powerdns.yml
+  - resources/powerdns/service-powerdns.yml
+  - resources/powerdns-admin/deployment-powerdns-admin.yml
+  - resources/powerdns-admin/service-powerdns-admin.yml
+  - resources/powerdns-admin/certificate-powerdns-admin.yml
+  - resources/powerdns-admin/ingress-powerdns-admin.yml
