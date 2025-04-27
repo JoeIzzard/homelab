@@ -12,6 +12,14 @@
     rke2_agent_token: "{{ lookup('community.general.onepassword', 'k8s_core_cluster [RKE2]', field='agent_token', vault='Homelab') }}"
   roles:
     - role: lablabs.rke2
+- name: Fix ReadWriteMany PVCs
+  hosts: k8s_core_cluster
+  tasks:
+    - name: Install NFS Client
+      become: yes
+      ansible.builtin.package:
+        name: nfs-common
+        state: present
 - name: Fix admin user path and config
   hosts: k8s_core_cluster
   tasks:
