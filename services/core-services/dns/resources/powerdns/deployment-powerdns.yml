@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: powerdns-auth
-          image: powerdns/pdns-auth-49:4.9.4
+          image: pschiffe/pdns-pgsql:4.9
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5300
