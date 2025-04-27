@@ -26,6 +26,11 @@ spec:
                 secretKeyRef:
                   name: powerdns-admin-env
                   key: SECRET_KEY
+            - name: SQLALCHEMY_DATABASE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: powerdns-admin-env
+                  key: SQLALCHEMY_DATABASE_URI
           volumeMounts:
             - mountPath: /data
               name: powerdns-admin
