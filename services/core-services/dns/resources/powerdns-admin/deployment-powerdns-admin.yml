@@ -18,7 +18,7 @@ spec:
           image: powerdnsadmin/pda-legacy:v0.4.2
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 9191
+            - containerPort: 80
               name: http
           env:
             - name: SECRET_KEY
