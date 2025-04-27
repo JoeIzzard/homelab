@@ -19,7 +19,7 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5300
-              name: dnsAuth
+              name: dns-auth
             - containerPort: 8081
               name: api
           volumeMounts:
