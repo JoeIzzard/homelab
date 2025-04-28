@@ -11,10 +11,10 @@ labels:
 resources:
   - resources/shared/namespace.yml
   - resources/database/config-db-init.yml
-  - resources/database/pvc.yml
-  - resources/database/pgql-creds.yml
-  - resources/database/deployment.yml
-  - resources/database/service.yml
+  - resources/database/pvc-pgql-data.yml
+  - resources/database/sealed-pgql-creds.yml
+  - resources/database/deployment-postgres.yml
+  - resources/database/service-db.yml
   - resources/powerdns/sealed-forward-zones.yml
   - resources/powerdns/sealed-pdns-auth-env.yml
   - resources/powerdns/sealed-pdns-recursor-config.yml
