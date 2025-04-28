@@ -19,6 +19,9 @@ resources:
   - resources/powerdns/sealed-pdns-recursor-config.yml
   - resources/powerdns/deployment-powerdns.yml
   - resources/powerdns/service-powerdns.yml
+  - resources/powerdns/service-api.yml
+  - resources/powerdns/certificate-api.yml
+  - resources/powerdns/ingress-api.yml
   - resources/powerdns-admin/pvc-powerdns-admin.yml
   - resources/powerdns-admin/sealed-powerdns-admin-env.yml
   - resources/powerdns-admin/deployment-powerdns-admin.yml
