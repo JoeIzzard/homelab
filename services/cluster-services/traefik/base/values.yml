@@ -19,6 +19,8 @@ service:
     service.beta.kubernetes.io/metal-lb: "true"
     metallb.universe.tf/address-pool: core-ip-pool
     metallb.universe.tf/allow-shared-ip: "core-services"
+  spec:
+    externalTrafficPolicy: Cluster
   ports:
     web:
       port: 80
