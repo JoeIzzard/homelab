@@ -13,5 +13,10 @@ spec:
     - name: dns
       port: 53
       targetPort: dns
+      protocol: TCP
+    - name: dns-udp
+      port: 53
+      targetPort: dns
+      protocol: UDP
   selector:
     app: powerdns
