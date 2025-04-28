@@ -20,6 +20,10 @@ spec:
           ports:
             - containerPort: 5300
               name: dns-auth
+              protocol: TCP
+            - containerPort: 5300
+              name: dns-auth-udp
+              protocol: UDP
             - containerPort: 8081
               name: api
           env:
