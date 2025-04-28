@@ -22,9 +22,79 @@ spec:
               name: dns-auth
             - containerPort: 8081
               name: api
-          volumeMounts:
-            - mountPath: /etc/powerdns/pdns.d
-              name: pdns-auth-config
+          env:
+            - name: PDNS_gpgsql_host
+              valueFrom:
+                secretKeyRef:
+                  name: pdns-auth-env
+                  key: PDNS_gpgsql_host
+
+            - name: PDNS_gpgsql_port
+              valueFrom:
+                secretKeyRef:
+                  name: pdns-auth-env
+                  key: PDNS_gpgsql_port
+
+            - name: PDNS_gpgsql_dbname
+              valueFrom:
+                secretKeyRef:
+                  name: pdns-auth-env
+                  key: PDNS_gpgsql_dbname
+
+            - name: PDNS_gpgsql_user
+              valueFrom:
+                secretKeyRef:
+                  name: pdns-auth-env
+                  key: PDNS_gpgsql_user
+
+            - name: PDNS_gpgsql_password
+              valueFrom:
+                secretKeyRef:
+                  name: pdns-auth-env
+                  key: PDNS_gpgsql_password
+
+            - name: PDNS_gpgsql_dnssec
+              valueFrom:
+                secretKeyRef:
+                  name: pdns-auth-env
+                  key: PDNS_gpgsql_dnssec
+
+            - name: PDNS_webserver
+              valueFrom:
+                secretKeyRef:
+                  name: pdns-auth-env
+                  key: PDNS_webserver
+
+            - name: PDNS_webserver_address
+              valueFrom:
+                secretKeyRef:
+                  name: pdns-auth-env
+                  key: PDNS_webserver_address
+
+            - name: PDNS_webserver_allow_from
+              valueFrom:
+                secretKeyRef:
+                  name: pdns-auth-env
+                  key: PDNS_webserver_allow_from
+
+            - name: PDNS_webserver_port
+              valueFrom:
+                secretKeyRef:
+                  name: pdns-auth-env
+                  key: PDNS_webserver_port
+
+            - name: PDNS_api
+              valueFrom:
+                secretKeyRef:
+                  name: pdns-auth-env
+                  key: PDNS_api
+
+            - name: PDNS_api_key
+              valueFrom:
+                secretKeyRef:
+                  name: pdns-auth-env
+                  key: PDNS_api_key
+
         - name: pdns-recursor
           image: powerdns/pdns-recursor-52:5.2.2
           imagePullPolicy: IfNotPresent
@@ -38,9 +108,6 @@ spec:
               name: pdns-forward-zones
 
       volumes:
-        - name: pdns-auth-config
-          secret:
-            secretName: powerdns-auth-config
         - name: pdns-recursor-config
           secret:
             secretName: powerdns-recursor-config
