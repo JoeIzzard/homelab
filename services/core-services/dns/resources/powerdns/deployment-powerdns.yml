@@ -94,6 +94,12 @@ spec:
                 secretKeyRef:
                   name: powerdns-auth-env
                   key: PDNS_api_key
+            
+            - name: PDNS_local_address
+              valueFrom:
+                secretKeyRef:
+                  name: powerdns-auth-env
+                  key: PDNS_local_address
 
         - name: pdns-recursor
           image: powerdns/pdns-recursor-52:5.2.2
