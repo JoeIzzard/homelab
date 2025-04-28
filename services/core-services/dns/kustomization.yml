@@ -10,6 +10,7 @@ labels:
 
 resources:
   - resources/shared/namespace.yml
+  - resources/database/config-db-init.yml
   - resources/database/pvc.yml
   - resources/database/pgql-creds.yml
   - resources/database/deployment.yml
