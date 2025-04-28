@@ -107,6 +107,10 @@ spec:
           ports:
             - containerPort: 53
               name: dns
+              protocol: TCP
+            - containerPort: 53
+              name: dns-udp
+              protocol: UDP
           volumeMounts:
             - mountPath: /etc/powerdns/recursor.d
               name: pdns-recursor-config
