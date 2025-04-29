@@ -106,7 +106,7 @@ spec:
                   key: PDNS_local_address
 
         - name: pdns-recursor
-          image: powerdns/pdns-recursor-52:5.2.2
+          image: pschiffe/pdns-recursor:5.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 53
@@ -116,11 +116,11 @@ spec:
               name: dns-udp
               protocol: UDP
           env:
-            - name: DEBUG_CONFIG
-              value: "yes"
+            - name: PDNS_forward_zones_file
+              value: "/etc/powerdns/forwardZones/zones.conf"
+            - name: PDNS_local_address
+              value: "0.0.0.0"
           volumeMounts:
-            - mountPath: /etc/powerdns/recursor.d
-              name: pdns-recursor-config
             - mountPath: /etc/powerdns/forwardZones
               name: pdns-forward-zones
 
