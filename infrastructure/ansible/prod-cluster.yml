@@ -1,0 +1,47 @@
+- name: Deploy RKE2
+  hosts: k8s_nebula_prod
+  become: yes
+  vars:
+    rke2_version: v1.32.1+rke2r1
+    rke2_ha_mode: true
+    rke2_api_ip: "192.168.0.20"
+    rke2_cluster_group_name: "k8s_nebula_prod"
+    rke2_servers_group_name: "k8s_nebula_prod_control_plane"
+    rke2_agents_group_name: "k8s_nebula_prod_workers"
+    rke2_token: "{{ lookup('community.general.onepassword', 'k8s_nebula_prod [RKE2]', field='token', vault='Homelab') }}"
+    rke2_agent_token: "{{ lookup('community.general.onepassword', 'k8s_nebula_prod [RKE2]', field='agent_token', vault='Homelab') }}"
+  roles:
+    - role: lablabs.rke2
+- name: Fix ReadWriteMany PVCs
+  hosts: k8s_nebula_prod
+  tasks:
+    - name: Install NFS Client
+      become: yes
+      ansible.builtin.package:
+        name: nfs-common
+        state: present
+- name: Fix admin user path and config
+  hosts: k8s_nebula_prod
+  tasks:
+    - name: Add RKE2 Binaries to Admin User Path
+      lineinfile:
+        path: /home/{{ansible_user}}/.bashrc
+        line: "export PATH=\"/var/lib/rancher/rke2/bin:$PATH\""
+        state: present
+    - name: Ensure .kube directory exists
+      file:
+        path: /home/{{ansible_user}}/.kube
+        state: directory
+        owner: "{{ansible_user}}"
+        group: "{{ansible_user}}"
+        mode: '0755'
+    - name: Add RKE2 KubeConfig to Admin User
+      become: yes
+      ansible.builtin.copy:
+        remote_src: true
+        src: /etc/rancher/rke2/rke2.yaml
+        dest: /home/{{ansible_user}}/.kube/config
+        owner: "{{ansible_user}}"
+        group: "{{ansible_user}}"
+        mode: '0644'
+

@@ -1,0 +1,31 @@
+k8s_nebula_prod:
+  children:
+    k8s_nebula_prod_control_plane:
+    k8s_nebula_prod_workers:
+
+k8s_nebula_prod_control_plane:
+  hosts:
+    k8-nebula-1:
+    k8-nebula-2:
+    k8-nebula-3:
+
+nebula_prod_services:
+  hosts:
+    k8-nebula-1:
+      ansible_host: 192.168.0.21
+      ansible_user: "{{ lookup('community.general.onepassword', 'K8 Nebula Prod Admin', field='username', vault='Homelab') }}"
+      ansible_password: "{{ lookup('community.general.onepassword', 'K8 Nebula Prod Admin', field='password', vault='Homelab') }}"
+      ansible_become_password: "{{ lookup('community.general.onepassword', 'K8 Nebula Prod Admin', field='password', vault='Homelab') }}"
+      primary_node: true
+    k8-nebula-2:
+      ansible_host: 192.168.0.22
+      ansible_user: "{{ lookup('community.general.onepassword', 'K8 Nebula Prod Admin', field='username', vault='Homelab') }}"
+      ansible_password: "{{ lookup('community.general.onepassword', 'K8 Nebula Prod Admin', field='password', vault='Homelab') }}"
+      ansible_become_password: "{{ lookup('community.general.onepassword', 'K8 Nebula Prod Admin', field='password', vault='Homelab') }}"
+      primary_node: false
+    k8-nebula-3:
+      ansible_host: 192.168.0.23
+      ansible_user: "{{ lookup('community.general.onepassword', 'K8 Nebula Prod Admin', field='username', vault='Homelab') }}"
+      ansible_password: "{{ lookup('community.general.onepassword', 'K8 Nebula Prod Admin', field='password', vault='Homelab') }}"
+      ansible_become_password: "{{ lookup('community.general.onepassword', 'K8 Nebula Prod Admin', field='password', vault='Homelab') }}"
+      primary_node: false
