@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nebula-cluster-traefik
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/instance: traefik-nebula
+    app.kubernetes.io/version: 0.0.2
+    app.kubernetes.io/managed-by: argocd
+    homelab.izzard.me/cluster: nebula
+  annotations:
+    homelab.izzard.me/environment: production
+    homelab.izzard.me/upstream-source: helm
+spec:
+  source:
+    repoURL: https://gitlab.com/joeizzard/homelab.git
+    targetRevision: HEAD
+    path: services/cluster-services/traefik/overlays/nebula
+  destination:
+    name: nebula-prod
+    namespace: traefik
+  project: nebula-cluster-services
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
