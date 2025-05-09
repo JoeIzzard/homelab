@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+  - L2-advertise.yml
+  - address-pool.yml
+
+labels:
+  - includeSelectors:
+    pairs:
+      app.kubernetes.io/managed-by: argocd
+      app.kubernetes.io/part-of: metallb
+      homelab.izzard.me/cluster: nebula
+      homelab.izzard.me/environment: production
+      homelab.izzard.me/upstream-source: helm
