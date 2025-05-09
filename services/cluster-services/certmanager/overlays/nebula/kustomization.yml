@@ -4,13 +4,13 @@ kind: Kustomization
 resources:
   - ../../base
   - sealed-cloudflare-api.yml
-
+  
 labels:
   - includeSelectors:
     pairs:
       app.kubernetes.io/managed-by: argocd
       app.kubernetes.io/part-of: cert-manager
-      homelab.izzard.me/cluster: core
+      homelab.izzard.me/cluster: nebula
       homelab.izzard.me/environment: production
       homelab.izzard.me/upstream-source: helm
   

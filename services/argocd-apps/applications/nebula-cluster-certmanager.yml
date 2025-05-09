@@ -1,0 +1,84 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nebula-cluster-certmanager
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager-nebula
+    app.kubernetes.io/version: 0.0.1
+    app.kubernetes.io/managed-by: argocd
+    homelab.izzard.me/cluster: nebula
+  annotations:
+    homelab.izzard.me/environment: production
+    homelab.izzard.me/upstream-source: helm
+spec:
+  # This solves a bug where argo-cd will mark the application as healthy but OutOfSync
+  # this occurs because cert-manager updates the status field in the CRD. This field
+  # makes argo-cd diff's think it is out of sync.
+  ignoreDifferences:
+    - group: apiextensions.k8s.io
+      kind: CustomResourceDefinition
+      name: certificaterequests.cert-manager.io
+      jsonPointers:
+        - /status
+        - /spec/validation/openAPIV3Schema/properties/spec/properties/solver/properties/dns01/properties/webhook/properties/config/x-kubernetes-preserve-unknown-fields
+        - /spec/validation/openAPIV3Schema/properties/spec/properties/acme/properties/solvers/items/properties/dns01/properties/webhook/properties/config/x-kubernetes-preserve-unknown-fields
+    - group: apiextensions.k8s.io
+      kind: CustomResourceDefinition
+      name: certificates.cert-manager.io
+      jsonPointers:
+        - /status
+        - /spec/validation/openAPIV3Schema/properties/spec/properties/solver/properties/dns01/properties/webhook/properties/config/x-kubernetes-preserve-unknown-fields
+        - /spec/validation/openAPIV3Schema/properties/spec/properties/acme/properties/solvers/items/properties/dns01/properties/webhook/properties/config/x-kubernetes-preserve-unknown-fields
+    - group: apiextensions.k8s.io
+      kind: CustomResourceDefinition
+      name: challenges.cert-manager.io
+      jsonPointers:
+        - /status
+        - /spec/validation/openAPIV3Schema/properties/spec/properties/solver/properties/dns01/properties/webhook/properties/config/x-kubernetes-preserve-unknown-fields
+        - /spec/validation/openAPIV3Schema/properties/spec/properties/acme/properties/solvers/items/properties/dns01/properties/webhook/properties/config/x-kubernetes-preserve-unknown-fields
+    - group: apiextensions.k8s.io
+      kind: CustomResourceDefinition
+      name: challenges.acme.cert-manager.io
+      jsonPointers:
+        - /status
+        - /spec/validation/openAPIV3Schema/properties/spec/properties/solver/properties/dns01/properties/webhook/properties/config/x-kubernetes-preserve-unknown-fields
+        - /spec/validation/openAPIV3Schema/properties/spec/properties/acme/properties/solvers/items/properties/dns01/properties/webhook/properties/config/x-kubernetes-preserve-unknown-fields
+    - group: apiextensions.k8s.io
+      kind: CustomResourceDefinition
+      name: clusterissuers.cert-manager.io
+      jsonPointers:
+        - /status
+        - /spec/validation/openAPIV3Schema/properties/spec/properties/solver/properties/dns01/properties/webhook/properties/config/x-kubernetes-preserve-unknown-fields
+        - /spec/validation/openAPIV3Schema/properties/spec/properties/acme/properties/solvers/items/properties/dns01/properties/webhook/properties/config/x-kubernetes-preserve-unknown-fields
+    - group: apiextensions.k8s.io
+      kind: CustomResourceDefinition
+      name: issuers.cert-manager.io
+      jsonPointers:
+        - /status
+        - /spec/validation/openAPIV3Schema/properties/spec/properties/solver/properties/dns01/properties/webhook/properties/config/x-kubernetes-preserve-unknown-fields
+        - /spec/validation/openAPIV3Schema/properties/spec/properties/acme/properties/solvers/items/properties/dns01/properties/webhook/properties/config/x-kubernetes-preserve-unknown-fields
+    - group: apiextensions.k8s.io
+      kind: CustomResourceDefinition
+      name: orders.acme.cert-manager.io
+      jsonPointers:
+        - /status
+        - /spec/validation/openAPIV3Schema/properties/spec/properties/solver/properties/dns01/properties/webhook/properties/config/x-kubernetes-preserve-unknown-fields
+        - /spec/validation/openAPIV3Schema/properties/spec/properties/acme/properties/solvers/items/properties/dns01/properties/webhook/properties/config/x-kubernetes-preserve-unknown-fields
+  source:
+    repoURL: https://gitlab.com/joeizzard/homelab.git
+    targetRevision: HEAD
+    path: services/cluster-services/certmanager/overlays/nebula
+  destination:
+    name: nebula-prod
+    namespace: cert-manager
+  project: nebula-cluster-services
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -11,6 +11,5 @@ generators:
   - cert-manager-helm.yml
 
 resources:
-  - cloudflare-api.yml
   - lets-encrypt-staging.yml
   - lets-encrypt-prod.yml
