@@ -1,7 +1,7 @@
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
-  name: nebula-ip-pool
+  name: core-ip-pool
   namespace: metallb-system
 spec:
   addresses:
