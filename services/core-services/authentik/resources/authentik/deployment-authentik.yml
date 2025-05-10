@@ -16,7 +16,7 @@ spec:
       containers:
         - name: server
           image: ghcr.io/goauthentik/server:2025.4.0
-          command: ["server"]
+          args: ["server"]
           envFrom:
             - secretRef:
                 name: authentik-conf-env
@@ -52,7 +52,7 @@ spec:
               protocol: TCP
         - name: worker
           image: ghcr.io/goauthentik/server:2025.4.0
-          command: ["worker"]
+          args: ["worker"]
           envFrom:
             - secretRef:
                 name: authentik-conf-env
