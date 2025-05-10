@@ -9,8 +9,6 @@ labels:
       app.kubernetes.io/managed-by: argocd
 
 namespace: authentik
-generators:
-  - authentik-helm.yml
 
 resources:
   - resources/shared/namespace.yml
