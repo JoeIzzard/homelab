@@ -13,7 +13,22 @@ generators:
   - authentik-helm.yml
 
 resources:
-  - resources/shared
-  - resources/database
-  - resources/redis
-  - resources/authentik
+  - resources/shared/namespace.yml
+  - resources/database/pvc-pgql-data.yml
+  - resources/database/sealed-pgql-creds.yml
+  - resources/database/deployment-postgres.yml
+  - resources/database/service-db.yml
+  - resources/redis/pvc-redis-data.yml
+  - resources/redis/deployment-redis.yml
+  - resources/redis/service-redis.yml
+  - resources/authentik/certificate-authentik.yml
+  - resources/authentik/pvc-certs.yml
+  - resources/authentik/pvc-media.yml
+  - resources/authentik/pvc-templates.yml
+  - resources/authentik/sealed-authentik-config-env.yml
+  - resources/authentik/sealed-email-env.yml
+  - resources/authentik/deployment-authentik.yml
+  - resources/authentik/service-authentik.yml
+  - resources/authentik/ingress-authentik.yml
+  
+
