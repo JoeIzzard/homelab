@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentik
+  namespace: authentik
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentik
+  template:
+    metadata:
+      labels:
+        app: authentik
+    spec:
+      containers:
+        - name: server
+          image: ghcr.io/goauthentik/server:2025.4.0
+          command: server
+          envFrom:
+            - secretRef:
+                name: authentik-conf-env
+            - secretRef:
+                name: email-env
+          env:
+            - name: AUTHENTIK_POSTGRESQL__USER
+              valueFrom:
+                secretKeyRef:
+                  name: pgql-creds
+                  key: POSTGRES_USER
+            - name: AUTHENTIK_POSTGRESQL__PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgql-creds
+                  key: POSTGRES_PASSWORD
+            - name: AUTHENTIK_POSTGRESQL__NAME
+              valueFrom:
+                secretKeyRef:
+                  name: pgql-creds
+                  key: POSTGRES_DB
+          volumeMounts:
+            - mountPath: /media
+              name: authentik-media
+            - mountPath: /templates
+              name: authentik-templates
+          ports:
+            - containerPort: 9000
+              name: http
+              protocol: TCP
+            - containerPort: 9443
+              name: https
+              protocol: TCP
+        - name: worker
+          image: ghcr.io/goauthentik/server:2025.4.0
+          command: worker
+          envFrom:
+            - secretRef:
+                name: authentik-conf-env
+            - secretRef:
+                name: email-env
+          env:
+            - name: AUTHENTIK_POSTGRESQL__USER
+              valueFrom:
+                secretKeyRef:
+                  name: pgql-creds
+                  key: POSTGRES_USER
+            - name: AUTHENTIK_POSTGRESQL__PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgql-creds
+                  key: POSTGRES_PASSWORD
+            - name: AUTHENTIK_POSTGRESQL__NAME
+              valueFrom:
+                secretKeyRef:
+                  name: pgql-creds
+                  key: POSTGRES_DB
+          volumeMounts:
+            - mountPath: /media
+              name: authentik-media
+            - mountPath: /templates
+              name: authentik-templates
+            - mountPath: /certs
+              name: authentik-certs
+
+      volumes:
+        - name: authentik-media
+          persistentVolumeClaim:
+            claimName: authentik-media
+        - name: authentik-templates
+          persistentVolumeClaim:
+            claimName: authentik-templates
+        - name: authentik-certs
+          persistentVolumeClaim:
+            claimName: authentik-certs
