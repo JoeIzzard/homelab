@@ -14,7 +14,7 @@ metadata:
     homelab.izzard.me/environment: production
     homelab.izzard.me/upstream-source: helm
 spec:
-  project: default
+  project: core-services
   source:
     repoURL: https://gitlab.com/joeizzard/homelab.git
     targetRevision: HEAD
