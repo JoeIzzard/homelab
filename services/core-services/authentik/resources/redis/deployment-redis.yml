@@ -16,7 +16,7 @@ spec:
       containers:
         - name: redis
           image: redis:alpine
-          command: --save 60 1 --loglevel warning
+          command: ["--save", "60", "1", "--loglevel", "warning"]
           ports:
             - containerPort: 6379
               name: redis
