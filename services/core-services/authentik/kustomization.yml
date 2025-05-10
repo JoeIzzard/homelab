@@ -24,7 +24,7 @@ resources:
   - resources/authentik/pvc-media.yml
   - resources/authentik/pvc-templates.yml
   - resources/authentik/sealed-authentik-config-env.yml
-  - resources/authentik/sealed-email-env.yml
+  - resources/authentik/sealed-mail-env.yml
   - resources/authentik/deployment-authentik.yml
   - resources/authentik/service-authentik.yml
   - resources/authentik/ingress-authentik.yml
