@@ -28,5 +28,8 @@ resources:
   - resources/authentik/deployment-authentik.yml
   - resources/authentik/service-authentik.yml
   - resources/authentik/ingress-authentik.yml
+  - resources/outpost/sealed-ldap-outpost.yml
+  - resources/outpost/deployment-outpost.yml
+  - resources/outpost/service-ldap.yml
   
 

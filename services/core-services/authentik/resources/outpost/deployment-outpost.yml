@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentik-outpost
+  namespace: authentik
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentik-outpost
+  template:
+    metadata:
+      labels:
+        app: authentik-outpost
+    spec:
+      containers:
+        - name: ldap-outpost
+          image: ghcr.io/goauthentik/ldap:2025.4.0
+          envFrom:
+            - secretRef:
+                name: authentik-ldap-outpost
+          ports:
+            - containerPort: 3389
+              name: ldap
+            - containerPort: 6636
+              name: ldaps
