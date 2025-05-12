@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: media-services
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app.kubernetes.io/name: media-services
+    app.kubernetes.io/instance: media-services
+    app.kubernetes.io/version: 0.0.1
+    app.kubernetes.io/managed-by: argocd
+    homelab.izzard.me/cluster: nebula
+    
+spec:
+  sourceRepos:
+    - https://gitlab.com/joeizzard/homelab.git
+  destinations:
+    - namespace: '*'
+      server: 'https://192.168.0.20:6443'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
