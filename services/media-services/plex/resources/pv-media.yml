@@ -15,7 +15,7 @@ spec:
   mountOptions:
     - dir_mode=0777
     - file_mode=0777
-    - user
+    - vers=2.0
   csi:
     driver: smb.csi.k8s.io
     volumeHandle: hl15.nebulanet.xyz/Media#plex-media
