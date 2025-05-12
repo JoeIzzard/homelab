@@ -21,6 +21,6 @@ spec:
     volumeHandle: hl15.nebulanet.xyz/Media#plex-media
     volumeAttributes:
       source: //hl15.nebulanet.xyz/Media
-    nodeStorageSecretRef:
+    nodeStageSecretRef:
       name: media-smb-creds
       namespace: media-plex
