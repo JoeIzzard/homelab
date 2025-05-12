@@ -10,6 +10,7 @@ labels:
 
 resources:
   - resources/namespace.yml
+  - resources/sc-smb-plex-media.yml
   - resources/pv-media.yml
   - resources/pvc-media.yml
   - resources/sealed-media-smb-creds.yml

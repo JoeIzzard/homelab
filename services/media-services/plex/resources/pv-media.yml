@@ -11,7 +11,7 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeSource: Retain
-  storageClassName: smb
+  storageClassName: smb-plex-media
   mountOptions:
     - dir_mode=0777
     - file_mode=0777
