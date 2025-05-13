@@ -67,7 +67,7 @@ spec:
       volumes:
         - name: media
           persistentVolumeClaim:
-            claimName: media-pvc
+            claimName: plex-media
         - name: config
           persistentVolumeClaim:
             claimName: plex-config
