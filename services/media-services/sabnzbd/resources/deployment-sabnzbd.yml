@@ -20,7 +20,7 @@ spec:
           ports:
             - containerPort: 8080
               name: sabnzbd
-          envFrom:
+          env:
             - name: PUID
               value: "1000"
             - name: PGID
