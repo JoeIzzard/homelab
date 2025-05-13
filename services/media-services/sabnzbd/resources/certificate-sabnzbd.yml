@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: sabnzbd
+  namespace: media-sabnzbd
+spec:
+  secretName: sabnzbd-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: sabnzbd.nebulanet.xyz
+  dnsNames:
+    - sabnzbd.nebulanet.xyz
+  renewBefore: 240h
+  duration: 2160h

@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: media-plex
+
+labels:
+  - includeSelectors:
+    pairs:
+      app.kubernetes.io/managed-by: argocd
+
+resources:
+  - resources/namespace.yml
+  - resources/certificate-sabnzbd.yml
+  - resources/deployment-sabnzbd.yml
+  - resources/service-sabnzbd.yml
+  - resources/ingress-sabnzbd.yml
+  - resources/pvc-config.yml
+  - resources/pvc-downloads.yml
+  - resources/pv-downloads.yml
+  - resources/sealed-downloads-smb-creds.yml
+  
+
