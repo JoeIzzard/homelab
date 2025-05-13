@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: powerdns
-  namespace: dns
+  name: plex-extras 
+  namespace: media-plex
   annotations:
     metallb.universe.tf/allow-shared-ip: "core-services"
 spec:
