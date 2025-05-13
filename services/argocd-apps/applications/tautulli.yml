@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tautulli
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app.kubernetes.io/name: tautulli
+    app.kubernetes.io/instance: tautulli
+    app.kubernetes.io/version: 0.0.1
+    app.kubernetes.io/managed-by: argocd
+    homelab.izzard.me/cluster: nebula
+  annotations:
+    homelab.izzard.me/environment: production
+spec:
+  source:
+    repoURL: https://gitlab.com/joeizzard/homelab.git
+    targetRevision: HEAD
+    path: services/media-services/tautulli
+  destination:
+    name: nebula-prod
+    namespace: media-tautulli
+  project: media-services
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

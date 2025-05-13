@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: tautulli
+  namespace: media-tautulli
+spec:
+  secretName: tautulli-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: tautulli.nebulanet.xyz
+  dnsNames:
+    - tautulli.nebulanet.xyz
+  renewBefore: 240h
+  duration: 2160h
