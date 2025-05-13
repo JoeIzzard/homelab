@@ -14,4 +14,11 @@ resources:
   - resources/pv-media.yml
   - resources/pvc-media.yml
   - resources/sealed-media-smb-creds.yml
+  - resources/pvc-plex-config.yml
+  - resources/sealed-plex-env.yml
+  - resources/deployment-plex.yml
+  - resources/service-plex.yml
+  - resources/service-plex-extras.yml
+  - resources/ingress-plex.yml
+  - resources/certificate-plex.yml
 
