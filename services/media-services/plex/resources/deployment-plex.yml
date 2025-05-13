@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plex
+  namespace: media-plex
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plex
+  template:
+    metadata:
+      labels:
+        app: plex
+    spec:
+      containers:
+        - name: plex
+          image: lscr.io/linuxserver/plex:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/London"
+            - name: VERSION
+              value: "docker"
+            - name: ADVERTISE_IP
+              value: "https://plex.nebulanet.xyz:443"
+          envFrom:
+            - secretRef:
+                name: plex-env
+          ports:
+            - containerPort: 32400
+              name: plex
+              protocol: TCP
+            - containerPort: 1900
+              name: plen_dlna1
+              protocol: UDP
+            - containerPort: 5353
+              name: bonjour
+              protocol: UDP
+            - containerPort: 8324
+              name: plex_roku
+              protocol: TCP
+            - containerPort: 32410
+              name: gdm_net1
+              protocol: UDP
+            - containerPort: 32412
+              name: gdm_net2
+              protocol: UDP
+            - containerPort: 32413
+              name: gdm_net3
+              protocol: UDP
+            - containerPort: 32414
+              name: gdm_net4
+              protocol: UDP
+            - containerPort: 32469
+              name: plex_dlna2
+              protocol: TCP
+          volumeMounts:
+            - name: media
+              mountPath: /hl15-media
+            - name: config
+              mountPath: /config
+      volumes:
+        - name: media
+          persistentVolumeClaim:
+            claimName: media-pvc
+        - name: config
+          persistentVolumeClaim:
+            claimName: plex-config

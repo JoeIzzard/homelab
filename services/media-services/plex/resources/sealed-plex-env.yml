@@ -1,0 +1,16 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: plex-env
+  namespace: media-plex
+spec:
+  encryptedData:
+    PLEX_CLAIM: AgCqRhd/6cgdW6u0dUbFILF7P1FDaigCBMa7DaMnqIWe9Zf7AVzbkMOF1i8PWuuC0V8+OjQ7TDaMunWBd7q4dGjcotKBGBSDP+HCQixhSEQBEUOdzc0cITBD/tdNvrQSrmVuFgH4ud/keRZabwybdrutmnY7qjHxIgcPXHmzGx4eETJb3fYkDEy7yQN4y+AmERITyipEcx4THwPO5Sz3YHK69P3cBMGK68LDsSXmwryA7XrjeuVhCUUqYSwzdc89QtBAC9lKW1NnAQO21rn5ztP/pcMJsCKopvK57APSUDJ9VBDn0sUns3JkeztslMNQCcNx1NZoqpPC1S0Qc7EZyBUrRRSJsNC05g7Tq9DXcaKE8vHGf9YvAwk6t9ABnz4FQhCzKCtgxkaphBOQJTXAt/OzjoKgLkPG9wXlrjIRCY22VYh6U8ndUllvh8d88smAN4XGH9hcv0dHkJMpCRUdnBvTFCvtvNrzZjf6cF2DVNEQtB+IqSka101bSoR3i5Upe5BDrNgY65ggBzlkrRQOjEmqcSXb51BKx0touzPD/VqeFiMa8hTC8Ed1DUP/EoXRzlOF0mvAR5C1mEb/qXPnEAjq3eyC2cKBhefKPW67jiy0cTbD8qH0kx9LH25cADp0qYHv1MbZ/quLWPU2a95efTfyzuKBZbVrHDDArVL4VX3OAK0+1Xx+PpwVNazha7+ghXnDBBxSa9sCKpquyFkx7QGU0rzFl4gngxyoYg==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: plex-env
+      namespace: media-plex
+    type: Opaque
