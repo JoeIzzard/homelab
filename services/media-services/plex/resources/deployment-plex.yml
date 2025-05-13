@@ -28,6 +28,8 @@ spec:
               value: "docker"
             - name: ADVERTISE_IP
               value: "https://plex.nebulanet.xyz:443"
+            - name: DOCKER_MODS
+              value: "linuxserver/mods:plex-audnexus"
           envFrom:
             - secretRef:
                 name: plex-env
