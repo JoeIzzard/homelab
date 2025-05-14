@@ -1,0 +1,15 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: smb-downloads
+provisioner: smb.csi.k8s.io
+parameters:
+  source: //hl15.nebulanet.xyz/Downloads
+  csi.storage.k8s.io/provisioner-secret-name: downloads-smb-creds
+  csi.storage.k8s.io/provisioner-secret-namespace: media-sonarr
+volumeBindingMode: Immediate
+mountOptions:
+  - dir_mode=0777
+  - file_mode=0777
+  - mfsymlinks
+  - noserverino 

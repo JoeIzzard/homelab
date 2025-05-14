@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sonarr
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app.kubernetes.io/name: sonarr
+    app.kubernetes.io/instance: sonarr
+    app.kubernetes.io/version: 0.0.1
+    app.kubernetes.io/managed-by: argocd
+    homelab.izzard.me/cluster: nebula
+  annotations:
+    homelab.izzard.me/environment: production
+spec:
+  source:
+    repoURL: https://gitlab.com/joeizzard/homelab.git
+    targetRevision: HEAD
+    path: services/media-services/sonarr
+  destination:
+    name: nebula-prod
+    namespace: media-sonarr
+  project: media-services
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

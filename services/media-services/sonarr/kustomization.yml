@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: media-sonarr
+
+labels:
+  - includeSelectors:
+    pairs:
+      app.kubernetes.io/managed-by: argocd
+
+resources:
+  - resources/namespace.yml
+  - resources/certificate.yml
+  - resources/deployment-sonarr.yml
+  - resources/service-sonarr.yml
+  - resources/ingress-sonarr.yml
+  - resources/pv-media.yml
+  - resources/pvc-media.yml
+  - resources/sc-smb-sonarr-media.yml
+  - resources/pv-downloads.yml
+  - resources/pvc-downloads.yml
+  - resources/sc-smb-downloads.yml
+  - resources/sealed-downloads-smb-creds.yml
+  - resources/pvc-sonarr-config.yml
+  
+
