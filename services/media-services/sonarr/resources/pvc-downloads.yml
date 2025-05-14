@@ -10,4 +10,4 @@ spec:
     requests:
       storage: 10Gi
   storageClassName: smb-downloads
-  volumeName: nas-downloads
+  volumeName: nas-downloads-sonarr
