@@ -10,7 +10,7 @@ labels:
 
 resources:
   - resources/namespace.yml
-  - resources/certificate.yml
+  - resources/certificate-sonarr.yml
   - resources/deployment-sonarr.yml
   - resources/service-sonarr.yml
   - resources/ingress-sonarr.yml
