@@ -22,5 +22,5 @@ spec:
     volumeAttributes:
       source: //hl15.nebulanet.xyz/Media
     nodeStageSecretRef:
-      name: media-smb-creds
+      name: downloads-smb-creds
       namespace: media-sonarr
