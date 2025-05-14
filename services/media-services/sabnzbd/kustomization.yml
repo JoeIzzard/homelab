@@ -18,5 +18,5 @@ resources:
   - resources/pvc-downloads.yml
   - resources/pv-downloads.yml
   - resources/sealed-downloads-smb-creds.yml
-
+  - resources/sealed-pia-creds.yml
 

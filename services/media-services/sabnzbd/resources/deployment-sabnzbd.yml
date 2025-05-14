@@ -13,6 +13,21 @@ spec:
       labels:
         app: sabnzbd
     spec:
+      initContainers:
+        - name: gluetun
+          image: docker.io/qmcgaw/gluetun:latest
+          imagePullPolicy: IfNotPresent
+          restartPolicy: Always
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          envFrom:
+            - secretRef:
+                name: pia-creds
+          env:
+            - name: VPN_SERVICE_PROVIDER
+              value: "private internet access"
       containers:
         - name: sabnzbd
           image: lscr.io/linuxserver/sabnzbd:latest
