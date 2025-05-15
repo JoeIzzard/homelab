@@ -7,7 +7,7 @@ resources:
   - ingress-dashboard.yml
   - middleware-dashboard-auth.yml
   - sealed-dashboard-users.yml
-
+  - sealed-backups-smb-creds.yml
 labels:
   - includeSelectors:
     pairs:
